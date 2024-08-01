@@ -1,0 +1,10 @@
+<pdf-viewer [src]="pdfSrc()"
+              [render-text]="true"
+              [original-size]="false"
+              style="width: 200px; height: 200px"
+              [page]="1" [show-all]="false" 
+              (after-load-complete)="afterLoadComplete($event)"
+  ></pdf-viewer>
+  <!-- TODO: import pdfjs-dist/types/src/display/api to get page count before rendering the pdf in cards
+   also see if we can implement the same without pdf-viewer
+   https://www.npmjs.com/package/ng2-pdf-viewer?activeTab=code-->
