@@ -6,9 +6,42 @@
     cursor: pointer;
 }
 
+svg, md-checkbox {
+    vertical-align: middle;
+}
+
+.page-list {
+    height: 500px;
+    overflow-y: auto;
+}
+
+.list-holder{
+    width: 300px;
+    #select-all{
+        text-align: right;
+        padding-right:23px;
+        margin-bottom: 10px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-track{
+    background: #fef7ff;
+}
+::-webkit-scrollbar-thumb {
+    background: #735eab;
+    border-radius: 5px;
+}
 .custom-placeholder {
     background: #ccc;
     border: dotted 3px #999;
     min-height: 60px;
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+#download-button {
+    padding: 20px;
+    text-align: center;
 }
