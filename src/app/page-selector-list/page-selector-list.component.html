@@ -1,11 +1,18 @@
 <div class="list-holder">
-    <div id="select-all">Select All &nbsp;<md-checkbox [checked]="selectAll" (change)="toggleSelectAll()"></md-checkbox>
+    <div id="select-all">
+        <md-icon class="arrows" (click)="reverseOrder()" slot="end">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+                <path
+                    d="M320-440v-287L217-624l-57-56 200-200 200 200-57 56-103-103v287h-80ZM600-80 400-280l57-56 103 103v-287h80v287l103-103 57 56L600-80Z" />
+            </svg>
+        </md-icon>
+        Select All &nbsp;<md-checkbox [checked]="selectAll" (change)="toggleSelectAll()"></md-checkbox>
     </div>
     <div class="page-list">
         <md-list cdkDropList (cdkDropListDropped)="drop($event)" style="max-width: 300px;">
             @for (page of pages; track $index) {
             <md-list-item cdkDrag>
-                Page {{ page.pageNumber }}
+                <span (click)="selectPage(page.pageNumber)" class="page-number">Page {{ page.pageNumber }}</span>
                 <div class="custom-placeholder" *cdkDragPlaceholder></div>
                 <md-icon cdkDragHandle class="drag-handle" slot="start"><svg xmlns="http://www.w3.org/2000/svg"
                         height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
@@ -29,6 +36,8 @@
             }
         </md-list>
     </div>
+    <md-filled-text-field label="Save As" (input)="setOutputFileName($event)"
+        supporting-text=".pdf will be appended to the input provided"></md-filled-text-field>
     <div id="download-button">
         <md-filled-button (click)="save()"><svg slot="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                 viewBox="0 0 24 24">

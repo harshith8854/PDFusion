@@ -1,10 +1,10 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, input } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, effect, input, output } from '@angular/core';
 import {CdkDragDrop, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPlaceholder, moveItemInArray} from '@angular/cdk/drag-drop';
 import '@material/web/list/list.js';
 import '@material/web/list/list-item.js';
 import '@material/web/divider/divider.js'
 import '@material/web/checkbox/checkbox.js';
-
+import '@material/web/textfield/filled-text-field.js';
 @Component({
   selector: 'app-page-selector-list',
   standalone: true,
@@ -15,13 +15,21 @@ import '@material/web/checkbox/checkbox.js';
 })
 export class PageSelectorListComponent {
 
-  pageCount = input(10);
+  pageCount = input(0);
   pages: Page[] = [];
   selectAll: boolean = false;
+  onPageClick = output<number>();
+  onSave = output<number[]>();
+  outputFileName: string | undefined;
+  onOutputFileNamed = output<string>();
+
   constructor() {
-    for (let i = 1; i <= this.pageCount(); i++) {
-      this.pages.push(new Page(i, false));
-    }
+    effect(() => {
+      console.log('page count is updated to : ',this.pageCount());
+      for (let i = 1; i <= this.pageCount(); i++) {
+        this.pages.push(new Page(i, false));
+      }
+    });
   }
 
   // this function will handle the drag and drop of pages
@@ -61,8 +69,26 @@ export class PageSelectorListComponent {
   save() {
     let final_pages: number[] = [];
     this.pages.filter(page => page.isSelected).map(page => final_pages.push(page.pageNumber));
-    console.log(final_pages);
-    return final_pages;
+    console.log('Final page order: ',final_pages);
+    this.onSave.emit(final_pages);
+    if(this.outputFileName){
+      this.onOutputFileNamed.emit(this.outputFileName);
+    }  else {
+      console.log('Output file name is not provided');
+    }
+  }
+
+  selectPage(pageNumber: number) {
+    this.onPageClick.emit(pageNumber);
+  }
+
+  setOutputFileName(event: any) {   
+    this.outputFileName = event.target.value;
+    console.log('Output file name is set to : ',this.outputFileName);
+  }
+
+  reverseOrder() {
+    this.pages.reverse();
   }
 }
 
