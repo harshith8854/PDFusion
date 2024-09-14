@@ -5,6 +5,7 @@ import '@material/web/list/list-item.js';
 import '@material/web/divider/divider.js'
 import '@material/web/checkbox/checkbox.js';
 import '@material/web/textfield/filled-text-field.js';
+import '@material/web/button/filled-button.js';
 @Component({
   selector: 'app-page-selector-list',
   standalone: true,

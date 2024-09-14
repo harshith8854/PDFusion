@@ -1,13 +1,42 @@
 <div id="root" class="container-flex">
-    <div class="row">
-        <div class="col-6">
-            <input type="file" (change)="onFileSelected($event)">
-            <app-page-selector-list [pageCount]="pageCount" (onPageClick)="displayPage($event)" 
-            (onSave)="generateOutput($event)" (onOutputFileNamed)="saveAs($event)"></app-page-selector-list>
+    @if (pdfSrc) {
+    <div class="row g-0 text-center">
+        <div class="col-3">
+            <div>
+                <h3>PDFUSION</h3>
+                <h6>Rearrange PDF Pages Online - Fast, Secure & 100% Private</h6>
+            </div>
+            <div>
+                <md-filled-button (click)="fileInput.click()">Choose File</md-filled-button>
+                <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+            </div>
+        </div>
+        <div class="col-3 middle-column">
+            <app-page-selector-list [pageCount]="pageCount" (onPageClick)="displayPage($event)"
+                (onSave)="generateOutput($event)" (onOutputFileNamed)="saveAs($event)"></app-page-selector-list>
         </div>
         <div class="col-6">
-            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false" [page]="showPage" style="width: 100%;height: 95vh;"
-                (after-load-complete)="afterLoadComplete($event)"></pdf-viewer>
+            <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false" [page]="showPage"
+                style="width: 100%; height: 100%;" (after-load-complete)="afterLoadComplete($event)"></pdf-viewer>
         </div>
     </div>
+    } 
+    @else {
+    <ng-container [ngTemplateOutlet]="noFileSelected"></ng-container>
+    }
 </div>
+<!-- TODO: release notes ela maintain cheyyali -->
+
+<ng-template #noFileSelected>
+    <div class="home">
+        <h1>PDFUSION</h1>
+        <p><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</p>
+        <p>Easily organize your PDF documents with our intuitive online tool, where everything happens right in your browser! Choose and rearrange the required pages with simple drag-and-drop functionality. No need to worry about privacy – your files are never uploaded to any server; all processing is done locally on your device, ensuring complete security and confidentiality.</p>
+        <p>Enjoy a seamless, private, and reliable experience.</p>
+        <div>
+            <md-filled-button (click)="fileInput.click()">Choose File</md-filled-button>
+            <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+        </div>
+    </div>
+    
+</ng-template>

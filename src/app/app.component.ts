@@ -2,19 +2,21 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, input, output } from '@angular/core'
 import { PageSelectorListComponent } from "./page-selector-list/page-selector-list.component";
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PDFDocument } from 'pdf-lib';
+import '@material/web/button/filled-button.js';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [PageSelectorListComponent, PdfViewerModule],
+  imports: [PageSelectorListComponent, PdfViewerModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppComponent {
-  pdfSrc: Uint8Array = new Uint8Array();
+  pdfSrc: Uint8Array | undefined;
   showPage = 1;
-  pageCount = 0;
+  pageCount = 10;
   pdfDoc: any;
   outputFileName: string = 'output.pdf';
 
