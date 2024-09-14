@@ -1,8 +1,4 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input, output } from '@angular/core';
-// index.js
-import '@material/web/button/filled-button.js';
-import '@material/web/button/outlined-button.js';
-import '@material/web/checkbox/checkbox.js';
 import { PageSelectorListComponent } from "./page-selector-list/page-selector-list.component";
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PDFDocument } from 'pdf-lib';
