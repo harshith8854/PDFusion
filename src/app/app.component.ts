@@ -1,5 +1,4 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, input, output } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 // index.js
 import '@material/web/button/filled-button.js';
 import '@material/web/button/outlined-button.js';
@@ -11,7 +10,7 @@ import { PDFDocument } from 'pdf-lib';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, PageSelectorListComponent, PdfViewerModule],
+  imports: [PageSelectorListComponent, PdfViewerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
