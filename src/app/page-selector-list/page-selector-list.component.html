@@ -1,7 +1,7 @@
 <div class="list-holder">
     <div id="select-all">
         <md-icon class="arrows" (click)="reverseOrder()" slot="end">
-            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24" fill="white" viewBox="0 -960 960 960" width="24">
                 <path
                     d="M320-440v-287L217-624l-57-56 200-200 200 200-57 56-103-103v287h-80ZM600-80 400-280l57-56 103 103v-287h80v287l103-103 57 56L600-80Z" />
             </svg>
@@ -9,7 +9,7 @@
         <label>Select All &nbsp;<md-checkbox [checked]="selectAll" (change)="toggleSelectAll()"></md-checkbox></label>
     </div>
     <div class="page-list">
-        <md-list cdkDropList (cdkDropListDropped)="drop($event)" style="max-width: 300px;">
+        <md-list cdkDropList (cdkDropListDropped)="drop($event)">
             @for (page of pages; track $index) {
             <md-list-item cdkDrag>
                 <span (click)="selectPage(page.pageNumber)" class="page-number">Page {{ page.pageNumber }}</span>

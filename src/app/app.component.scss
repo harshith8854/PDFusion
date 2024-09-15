@@ -2,6 +2,7 @@
 #root {
   @extend .suse-normal;
   height: 100vh;
+  overflow: hidden;
   background-color: var(--md-sys-color-surface);
 }
 
@@ -21,12 +22,29 @@
   md-filled-button {
     margin: 20px 0px;
   }
+
+  ul{
+    font-weight: 300;
+    font-size: small;
+  }
 }
 
 .middle-column {
-  padding: 10px 0px;
+  background-color: #4E1E44;
+  padding: 40px 0px;
+  height: 100vh;
+  h6{
+    color: white;
+    margin-left: 40px;
+    font-style: italic;
+    font-weight: 500;
+  }
 }
 
+.right-column {
+  height: 100vh;
+  overflow: hidden;
+}
 // ///////////////////////////////////////////////
 
 .home {

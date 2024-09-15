@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   pdfSrc: Uint8Array | undefined;
   showPage = 1;
-  pageCount = 10;
+  pageCount = 0;
   pdfDoc: any;
   outputFileName: string = 'output.pdf';
   inputFileName: string | undefined;
