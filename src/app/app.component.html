@@ -1,42 +1,49 @@
 <div id="root" class="container-flex">
     @if (pdfSrc) {
     <div class="row g-0 text-center">
-        <div class="col-3">
-            <div>
-                <h3>PDFUSION</h3>
-                <h6>Rearrange PDF Pages Online - Fast, Secure & 100% Private</h6>
-            </div>
-            <div>
-                <md-filled-button (click)="fileInput.click()">Choose File</md-filled-button>
-                <input type="file" hidden #fileInput (change)="onFileSelected($event)">
-            </div>
+        <div class="col-3 left-column">
+            <h1>PDFUSION</h1>
+            <div><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</div>
+            <md-filled-button (click)="fileInput.click()">Choose File</md-filled-button>
+            <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+            <p>File Selected: <span class="highlight">{{inputFileName}}</span></p>
+            <p>Page Count: <span class="highlight">{{pageCount}}</span></p>
+            <md-filled-text-field label="Save As" value="output" (input)="setOutputFileName($event)"
+                supporting-text=".pdf will be appended to the input provided"></md-filled-text-field>
+            <md-filled-button (click)="generateOutput(pageList)"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z" />
+                </svg>Download {{outputFileName}}</md-filled-button>
         </div>
         <div class="col-3 middle-column">
-            <app-page-selector-list [pageCount]="pageCount" (onPageClick)="displayPage($event)"
-                (onSave)="generateOutput($event)" (onOutputFileNamed)="saveAs($event)"></app-page-selector-list>
+            <app-page-selector-list #pageList [pageCount]="pageCount" [outputFileName]="outputFileName"
+                (onPageClick)="displayPage($event)"></app-page-selector-list>
         </div>
         <div class="col-6">
             <pdf-viewer [src]="pdfSrc" [render-text]="true" [original-size]="false" [page]="showPage"
                 style="width: 100%; height: 100%;" (after-load-complete)="afterLoadComplete($event)"></pdf-viewer>
         </div>
     </div>
-    } 
+    }
     @else {
     <ng-container [ngTemplateOutlet]="noFileSelected"></ng-container>
     }
 </div>
 <!-- TODO: release notes ela maintain cheyyali -->
- <!-- TODO: to host in github pages -->
+<!-- TODO: to host in github pages -->
 <!-- TODO: to have font files in the project once they are finalized -->
 <ng-template #noFileSelected>
-    <div class="home suse-normal">
+    <div class="home">
         <h1>PDFUSION</h1>
         <p><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</p>
         <div class="description">
-            <p>Easily organize your PDF documents with our intuitive online tool, where <b>everything happens right in your browser!</b></p>
+            <p>Easily organize your PDF documents with our intuitive online tool, where <b>everything happens right in
+                    your browser!</b></p>
             <ul>
-            <li>Choose and rearrange the required pages with simple drag-and-drop functionality. </li>
-            <li>No need to worry about privacy – your files are never uploaded to any server; all processing is done locally on your device, ensuring complete security and confidentiality.</li>
+                <li>Choose and rearrange the required pages with simple drag-and-drop functionality. </li>
+                <li>No need to worry about privacy – your files are never uploaded to any server; all processing is done
+                    locally on your device, ensuring complete security and confidentiality.</li>
             </ul>
             <p>Enjoy a seamless, private, and reliable experience.</p>
             <div>
@@ -44,5 +51,5 @@
                 <input type="file" hidden #fileInput (change)="onFileSelected($event)">
             </div>
         </div>
-    </div>    
+    </div>
 </ng-template>

@@ -21,8 +21,7 @@ export class PageSelectorListComponent {
   selectAll: boolean = false;
   onPageClick = output<number>();
   onSave = output<number[]>();
-  outputFileName: string | undefined;
-  onOutputFileNamed = output<string>();
+  outputFileName = input<string>();
 
   constructor() {
     effect(() => {
@@ -66,26 +65,8 @@ export class PageSelectorListComponent {
     this.pages.map(page => page.isSelected = this.selectAll);
   }
 
-  // this function will return list of pages that are selected and in the order as chosen by user
-  save() {
-    let final_pages: number[] = [];
-    this.pages.filter(page => page.isSelected).map(page => final_pages.push(page.pageNumber));
-    console.log('Final page order: ',final_pages);
-    this.onSave.emit(final_pages);
-    if(this.outputFileName){
-      this.onOutputFileNamed.emit(this.outputFileName);
-    }  else {
-      console.log('Output file name is not provided');
-    }
-  }
-
   selectPage(pageNumber: number) {
     this.onPageClick.emit(pageNumber);
-  }
-
-  setOutputFileName(event: any) {   
-    this.outputFileName = event.target.value;
-    console.log('Output file name is set to : ',this.outputFileName);
   }
 
   reverseOrder() {

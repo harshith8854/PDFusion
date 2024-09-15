@@ -19,9 +19,11 @@ export class AppComponent {
   pageCount = 10;
   pdfDoc: any;
   outputFileName: string = 'output.pdf';
+  inputFileName: string | undefined;
 
   async onFileSelected(event: any) {
     const file = event.target.files[0];
+    this.inputFileName = file.name;
     const fileReader = new FileReader();
     fileReader.onload = async (e) => {
       this.pdfSrc = fileReader.result as Uint8Array;
@@ -38,7 +40,9 @@ export class AppComponent {
     this.showPage = page;
   }
 
-  async generateOutput(pages: number[]) {
+  async generateOutput(pageList: PageSelectorListComponent) {
+    const pages: number[] = [];
+    pageList.pages.filter(p => p.isSelected).map(p => pages.push(p.pageNumber));
     const newPDF = await PDFDocument.create();
     for (const element of pages) {      
       const [page] = await newPDF.copyPages(this.pdfDoc, [element-1]); //PDFDocument indexes the pages from 0
@@ -71,7 +75,7 @@ export class AppComponent {
     window.URL.revokeObjectURL(url);
   }
 
-  saveAs(fileName: string) {
-    this.outputFileName = fileName+".pdf";
+  setOutputFileName(event: any) {   
+    this.outputFileName = (event.target.value ? event.target.value : 'output') +".pdf";
   }
 }
