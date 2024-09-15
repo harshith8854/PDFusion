@@ -26,6 +26,7 @@ export class PageSelectorListComponent {
   constructor() {
     effect(() => {
       console.log('page count is updated to : ',this.pageCount());
+      this.pages = [];
       for (let i = 1; i <= this.pageCount(); i++) {
         this.pages.push(new Page(i, false));
       }
