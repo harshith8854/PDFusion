@@ -8,7 +8,7 @@
             <input type="file" hidden #fileInput (change)="onFileSelected($event)">
             <p>File Selected: <span class="highlight">{{inputFileName}}</span></p>
             <p>Page Count: <span class="highlight">{{pageCount}}</span></p>
-            <md-filled-text-field label="Save As" value="output" (input)="setOutputFileName($event)"
+            <md-filled-text-field type="text" maxLength="30" label="Save As" value="output" (input)="setOutputFileName($event)"
                 supporting-text=".pdf will be appended to the input provided"></md-filled-text-field>
             <md-filled-button (click)="generateOutput(pageList)"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" viewBox="0 0 24 24">
