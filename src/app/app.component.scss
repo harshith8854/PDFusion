@@ -68,4 +68,25 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
+  .footer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: #4E1E44;
+    color: white;
+    span {
+      a {
+        text-decoration: none;
+        margin: 0px 5px;
+      }
+    }
+    #git-ref {
+      text-decoration: none;
+      position: absolute;
+      right: 20px;
+    }
+  }
 }

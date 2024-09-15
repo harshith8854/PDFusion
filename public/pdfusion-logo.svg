@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <!-- Background -->
+    <rect x="0" y="0" width="200" height="200" fill="#181215" />
+
+    <!-- Fusion symbol (inspired by nuclear fusion) -->
+    <circle cx="100" cy="100" r="70" fill="none" stroke="#C73BAF" stroke-width="6" />
+    <ellipse cx="100" cy="100" rx="40" ry="70" fill="none" stroke="#C73BAF" stroke-width="6" />
+    <ellipse cx="100" cy="100" rx="70" ry="40" fill="none" stroke="#C73BAF" stroke-width="6" />
+
+    <!-- PDF text -->
+    <text x="100" y="115" font-family="Arial, sans-serif" font-size="34" font-weight="bold"
+        fill="#C73BAF" text-anchor="middle">PDF</text>
+    <!-- <text x="100" y="205" font-family="Arial, sans-serif" font-size="28" font-weight="bold"
+        fill="#C73BAF" text-anchor="middle">PDFUSION</text> -->
+</svg>
