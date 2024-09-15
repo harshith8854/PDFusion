@@ -26,17 +26,23 @@
     }
 </div>
 <!-- TODO: release notes ela maintain cheyyali -->
-
+ <!-- TODO: to host in github pages -->
+<!-- TODO: to have font files in the project once they are finalized -->
 <ng-template #noFileSelected>
-    <div class="home">
+    <div class="home suse-normal">
         <h1>PDFUSION</h1>
         <p><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</p>
-        <p>Easily organize your PDF documents with our intuitive online tool, where everything happens right in your browser! Choose and rearrange the required pages with simple drag-and-drop functionality. No need to worry about privacy – your files are never uploaded to any server; all processing is done locally on your device, ensuring complete security and confidentiality.</p>
-        <p>Enjoy a seamless, private, and reliable experience.</p>
-        <div>
-            <md-filled-button (click)="fileInput.click()">Choose File</md-filled-button>
-            <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+        <div class="description">
+            <p>Easily organize your PDF documents with our intuitive online tool, where <b>everything happens right in your browser!</b></p>
+            <ul>
+            <li>Choose and rearrange the required pages with simple drag-and-drop functionality. </li>
+            <li>No need to worry about privacy – your files are never uploaded to any server; all processing is done locally on your device, ensuring complete security and confidentiality.</li>
+            </ul>
+            <p>Enjoy a seamless, private, and reliable experience.</p>
+            <div>
+                <md-filled-button (click)="fileInput.click()">Choose File</md-filled-button>
+                <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+            </div>
         </div>
-    </div>
-    
+    </div>    
 </ng-template>
