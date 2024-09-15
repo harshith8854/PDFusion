@@ -12,7 +12,7 @@ svg, md-checkbox {
 }
 
 .list-holder{
-    @extend .suse-normal;
+    font-family: "SUSE", sans-serif;
     overflow: hidden;
     #select-all{
         color: #F6B2E0;

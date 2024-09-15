@@ -1,9 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-    // --md-list-item-top-space: 0px;
-    // --md-list-item-bottom-space: 0px;
-    // --md-list-item-leading-space: 0px;
-    // --md-list-item-trailing-space: 0px;
     --md-sys-color-primary: rgb(246 178 224);
     --md-sys-color-surface-tint: rgb(246 178 224);
     --md-sys-color-on-primary: rgb(78 30 68);
@@ -64,4 +60,12 @@
     font-optical-sizing: auto;
     font-weight: normal;
     font-style: normal;
+  }
+
+  @font-face {
+    font-family: SUSE;
+    font-optical-sizing: auto;
+    font-weight: normal;
+    font-style: normal;
+    src: url("../public/static/SUSE-Regular.ttf") format("truetype");
   }
