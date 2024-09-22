@@ -1,37 +1,42 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, effect, input, output } from '@angular/core';
-import {CdkDragDrop, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPlaceholder, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, effect, inject, input, output } from '@angular/core';
+import { CdkDragDrop, CdkDropList, CdkDrag, CdkDragHandle, CdkDragPlaceholder, moveItemInArray } from '@angular/cdk/drag-drop';
 import '@material/web/list/list.js';
 import '@material/web/list/list-item.js';
 import '@material/web/divider/divider.js'
 import '@material/web/checkbox/checkbox.js';
 import '@material/web/textfield/filled-text-field.js';
 import '@material/web/button/filled-button.js';
+import { Page } from '../models/page';
+import { PDFDetails } from '../models/pdf-file';
+import { ApplicationContext } from '../contexts/application.context';
 @Component({
   selector: 'app-page-selector-list',
   standalone: true,
   imports: [CdkDropList, CdkDrag, CdkDragHandle, CdkDragPlaceholder],
   templateUrl: './page-selector-list.component.html',
   styleUrl: './page-selector-list.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: []
 })
 export class PageSelectorListComponent {
 
-  pageCount = input(0);
   pages: Page[] = [];
   selectAll: boolean = false;
-  onPageClick = output<number>();
+  onPageClick = output<Page>();
   onSave = output<number[]>();
-  outputFileName = input<string>();
+  applicationContext: ApplicationContext = inject(ApplicationContext);
 
   constructor() {
-    effect(() => {
-      console.log('page count is updated to : ',this.pageCount());
-      this.pages = [];
-      for (let i = 1; i <= this.pageCount(); i++) {
-        this.pages.push(new Page(i, false));
-      }
+    this.applicationContext.inputFileDetails.subscribe({
+      next: (fileDetails: PDFDetails) => {
+          for (let i = 1; i <= fileDetails.pageCount; i++) {
+            this.pages.push(new Page(i, false, fileDetails.name, fileDetails.color));
+          }
+            console.log(`${fileDetails.pageCount} pages added for file: ${fileDetails.name}`);
+        }
     });
   }
+
 
   // this function will handle the drag and drop of pages
   drop(event: CdkDragDrop<Page[]>) {
@@ -66,20 +71,15 @@ export class PageSelectorListComponent {
     this.pages.map(page => page.isSelected = this.selectAll);
   }
 
-  selectPage(pageNumber: number) {
-    this.onPageClick.emit(pageNumber);
+  selectPage(page: Page) {
+    this.onPageClick.emit(page);
   }
 
   reverseOrder() {
     this.pages.reverse();
   }
-}
 
-export class Page {
-  pageNumber: number;
-  isSelected: boolean;
-  constructor(pageNumber: number, isSelected: boolean) {
-    this.pageNumber = pageNumber;
-    this.isSelected = isSelected;
+  deletePagesOfFile(fileName: string) {
+    this.pages = this.pages.filter(p => p.fileName !== fileName);
   }
 }

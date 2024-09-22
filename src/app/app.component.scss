@@ -2,14 +2,30 @@
   font-family: "SUSE", sans-serif;
   height: 100vh;
   overflow: hidden;
+  // background-color: #3A0032;
   background-color: var(--md-sys-color-surface);
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #68355C;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #FFD7F0;
+    border-radius: 5px;
+  }
 }
 
 .left-column {
-  padding: 40px;
+  padding: 40px 10px 40px 40px;
   color: #C73BAF;
   text-align: left;
-  .highlight{
+  overflow: hidden;
+  height: 100vh;
+
+  .highlight {
     font-weight: 300;
     color: #FFD7F0;
   }
@@ -20,11 +36,38 @@
 
   md-filled-button {
     margin: 20px 0px;
+    cursor: pointer;
   }
 
-  ul{
+  md-icon-button {
+    cursor: pointer;
+  }
+
+  sub {
+    color: #E9A6D3;
+  }
+
+  ul {
     font-weight: 300;
     font-size: small;
+  }
+
+  .left-body {
+    height: calc(100vh - 250px);
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background: #68355C;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background: #FFD7F0;
+      border-radius: 5px;
+    }
   }
 }
 
@@ -32,10 +75,10 @@
   background-color: #4E1E44;
   padding: 40px 0px;
   height: 100vh;
-  h6{
+
+  h6 {
     color: white;
     margin-left: 40px;
-    font-style: italic;
     font-weight: 500;
   }
 }
@@ -44,6 +87,7 @@
   height: 100vh;
   overflow: hidden;
 }
+
 // ///////////////////////////////////////////////
 
 .home {
@@ -69,20 +113,23 @@
     transform: translate(-50%, -50%);
   }
 
-  .footer{
+  .footer {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 20px;
-    background-color: #4E1E44;
+    // background-color: #4E1E44;
     color: white;
+
     span {
       a {
         text-decoration: none;
         margin: 0px 5px;
+        // color: #C73BAF;
       }
     }
+
     #git-ref {
       text-decoration: none;
       position: absolute;

@@ -12,7 +12,7 @@
         <md-list cdkDropList (cdkDropListDropped)="drop($event)">
             @for (page of pages; track $index) {
             <md-list-item cdkDrag>
-                <span (click)="selectPage(page.pageNumber)" class="page-number">Page {{ page.pageNumber }}</span>
+                <span (click)="selectPage(page)" [style.color]="page.fileColor" class="page-number">Page {{ page.pageNumber }}</span>
                 <div class="custom-placeholder" *cdkDragPlaceholder></div>
                 <md-icon cdkDragHandle class="drag-handle" slot="start"><svg xmlns="http://www.w3.org/2000/svg"
                         height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
