@@ -44,8 +44,9 @@ export class AppComponent {
         const pdfDoc = await PDFDocument.load(arrayBuffer);
         this.pdfDocs.push(pdfDoc); //used in generating output
         const fileColor = this.colorService.generateBrightColor();
-        this.inputFiles.push(new PDFFile(file.name as string, arrayBuffer, pdfDoc.getPageCount(),fileColor)); //used in displaying pdf
-        this.applicationContext.inputFileDetails.next(new PDFDetails(file.name, pdfDoc.getPageCount(), fileColor));
+        const pdfFile = new PDFFile(file.name, arrayBuffer, pdfDoc.getPageCount(), fileColor);
+        this.inputFiles.push(pdfFile); //used in displaying pdf
+        this.applicationContext.inputFileDetails.next(new PDFDetails(file.name, pdfDoc.getPageCount(), fileColor, pdfFile.id));
         if (currentFile === fileCount) {
           console.log('completed reading all files');
           this.showPDF = this.inputFiles[0].data;
@@ -60,7 +61,7 @@ export class AppComponent {
 
 
   deleteFile(index: number) {
-    this.pageSelectorListComponent.deletePagesOfFile(this.inputFiles[index].name);
+    this.pageSelectorListComponent.deletePagesOfFile(this.inputFiles[index].id);
     this.inputFiles.splice(index, 1);
     this.pdfDocs.splice(index, 1);
     if(this.inputFiles.length == 0) {

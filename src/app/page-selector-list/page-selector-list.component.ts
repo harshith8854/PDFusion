@@ -30,7 +30,7 @@ export class PageSelectorListComponent {
     this.applicationContext.inputFileDetails.subscribe({
       next: (fileDetails: PDFDetails) => {
           for (let i = 1; i <= fileDetails.pageCount; i++) {
-            this.pages.push(new Page(i, false, fileDetails.name, fileDetails.color));
+            this.pages.push(new Page(i, false, fileDetails.name, fileDetails.color, fileDetails.id));
           }
             console.log(`${fileDetails.pageCount} pages added for file: ${fileDetails.name}`);
         }
@@ -79,7 +79,7 @@ export class PageSelectorListComponent {
     this.pages.reverse();
   }
 
-  deletePagesOfFile(fileName: string) {
-    this.pages = this.pages.filter(p => p.fileName !== fileName);
+  deletePagesOfFile(id: string) {
+    this.pages = this.pages.filter(p => p.fileId !== id);
   }
 }
