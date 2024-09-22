@@ -36,6 +36,7 @@ export class AppComponent {
   async onFileSelected(event: any) {
     const fileCount = event.target.files.length;
     let currentFile = 1;
+    let inputFileDetails: PDFDetails[] = [];
     for (const file of event.target.files) {
       const fileReader = new FileReader();
       fileReader.onload = async (e) => {
@@ -46,12 +47,13 @@ export class AppComponent {
         const fileColor = this.colorService.generateBrightColor();
         const pdfFile = new PDFFile(file.name, arrayBuffer, pdfDoc.getPageCount(), fileColor);
         this.inputFiles.push(pdfFile); //used in displaying pdf
-        this.applicationContext.inputFileDetails.next(new PDFDetails(file.name, pdfDoc.getPageCount(), fileColor, pdfFile.id));
+        inputFileDetails.push(new PDFDetails(file.name, pdfDoc.getPageCount(), fileColor, pdfFile.id));
         if (currentFile === fileCount) {
           console.log('completed reading all files');
           this.showPDF = this.inputFiles[0].data;
           this.showPDFName = this.inputFiles[0].name;
           this.showPage = 1;
+          this.applicationContext.inputFileDetails.next(inputFileDetails);
         }
         currentFile++;
       }

@@ -28,12 +28,13 @@ export class PageSelectorListComponent {
 
   constructor() {
     this.applicationContext.inputFileDetails.subscribe({
-      next: (fileDetails: PDFDetails) => {
-          for (let i = 1; i <= fileDetails.pageCount; i++) {
-            this.pages.push(new Page(i, false, fileDetails.name, fileDetails.color, fileDetails.id));
+      next: (fileDetails: PDFDetails[]) => {
+        for (let fileDetail of fileDetails) {
+          for (let i = 1; i <= fileDetail.pageCount; i++) {
+            this.pages.push(new Page(i, false, fileDetail.name, fileDetail.color, fileDetail.id));
           }
-            console.log(`${fileDetails.pageCount} pages added for file: ${fileDetails.name}`);
         }
+      }
     });
   }
 

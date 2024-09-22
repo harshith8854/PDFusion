@@ -6,5 +6,5 @@ import { PDFDetails } from "../models/pdf-file";
     {providedIn: 'root'}
 )
 export class ApplicationContext {
-    inputFileDetails: ReplaySubject<PDFDetails> = new ReplaySubject<PDFDetails>(100);
+    inputFileDetails: BehaviorSubject<PDFDetails[]> = new BehaviorSubject<PDFDetails[]>([]);
 }   
