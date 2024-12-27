@@ -1,57 +1,72 @@
 <div id="root" class="container-flex">
     @if (showPDF) {
     <div class="row g-0">
-        <div class="col-3 left-column">
+        <div class="col-7 left-column">
             <h1>PDFUSION</h1>
             <div><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</div>
-            <md-filled-button (click)="fileInput.click()">Choose Files</md-filled-button>
-            <input type="file" hidden #fileInput (change)="onFileSelected($event)" multiple>
-            <div class="left-body">
-                @for (file of inputFiles; track $index) {
-                <p>File {{ $index + 1 }}: <span class="highlight" [ngStyle]="{'color':file.color}">{{file.name}}</span>&nbsp;<sub>{{file.pageCount}}
-                        @if (file.pageCount>1) {
-                            pages
-                        } @else {
-                            page
+            <div class="row g-1">
+                <div class="col-7">
+                    <md-filled-button (click)="fileInput.click()">Choose Files</md-filled-button>
+                    <input type="file" hidden #fileInput (change)="onFileSelected($event)" multiple>
+                    @if (invalidFileNames.length > 0) {
+                        <div style="margin-top: 10px; color: red;">
+                            Error while loading the file{{invalidFileNames.length == 1 ? '' : 's'}}:
+                                @for (item of invalidFileNames; track $index) {
+                                    <span> {{item}}{{ $index < invalidFileNames.length - 1 ? ',' : '.' }}</span>
+                                }
+                        </div>
+                    }
+                    <div class="left-body">
+                        @for (file of inputFiles; track $index) {
+                        <p>File {{ $index + 1 }}: <span class="highlight" [ngStyle]="{'color':file.color}">{{file.name}}</span>&nbsp;<sub>{{file.pageCount}}
+                                @if (file.pageCount>1) {
+                                    pages
+                                } @else {
+                                    page
+                                }
+                            </sub> &nbsp;
+                                <md-icon-button (click)="deleteFile($index)">
+                                    <md-icon><svg xmlns="http://www.w3.org/2000/svg" height="22" fill="white" viewBox="0 -960 960 960"
+                                            width="22">
+                                            <path
+                                                d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z" />
+                                        </svg></md-icon>
+                                </md-icon-button>
+                        </p>
                         }
-                    </sub> &nbsp;
-                        <md-icon-button (click)="deleteFile($index)">
-                            <md-icon><svg xmlns="http://www.w3.org/2000/svg" height="22" fill="white" viewBox="0 -960 960 960"
-                                    width="22">
-                                    <path
-                                        d="M480-424 284-228q-11 11-28 11t-28-11q-11-11-11-28t11-28l196-196-196-196q-11-11-11-28t11-28q11-11 28-11t28 11l196 196 196-196q11-11 28-11t28 11q11 11 11 28t-11 28L536-480l196 196q11 11 11 28t-11 28q-11 11-28 11t-28-11L480-424Z" />
-                                </svg></md-icon>
-                        </md-icon-button>
-                </p>
-                }
-                <md-filled-text-field type="text" maxLength="30" label="Save As" value="output"
-                    (input)="setOutputFileName($event)"
-                    supporting-text=".pdf will be appended to the input provided"></md-filled-text-field>
-                <md-filled-button (click)="generateOutput(pageList)"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
-                        width="24" height="24" viewBox="0 0 24 24">
-                        <path
-                            d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z" />
-                    </svg>Download {{outputFileName}}</md-filled-button>
-                <div>
-                    Guidelines:
-                    <ul>
-                        <li>Use arrows / Drag placeholder to reorder pages</li>
-                        <li>Click on page number to view the page</li>
-                        <li>Click on checkbox to select/deselect a page</li>
-                        <li>Click on select all checkbox to select/deselect all pages</li>
-                        <li>Click on reverse icon to reverse the order of pages</li>
-                        <li>File entry and it's pages are colored the same</li>
-                    </ul>
+                        <md-filled-text-field type="text" maxLength="100" label="Save As" value="output"
+                            (input)="setOutputFileName($event)"
+                            supporting-text=".pdf will be appended to the input provided"></md-filled-text-field><br>
+                        <md-filled-button (click)="generateOutput(pageList)"><svg slot="icon" xmlns="http://www.w3.org/2000/svg"
+                                width="24" height="24" viewBox="0 0 24 24">
+                                <path
+                                    d="M16.59 9H15V4c0-.55-.45-1-1-1h-4c-.55 0-1 .45-1 1v5H7.41c-.89 0-1.34 1.08-.71 1.71l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.63-.63.19-1.71-.7-1.71zM5 19c0 .55.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1H6c-.55 0-1 .45-1 1z" />
+                            </svg>Download {{outputFileName}}</md-filled-button>
+                        <div>
+                            Guidelines:
+                            <ul>
+                                <li>Use arrows / Drag placeholder to reorder pages</li>
+                                <li>Click on page number to view the page</li>
+                                <li>Click on checkbox to select/deselect a page</li>
+                                <li>Click on select all checkbox to select/deselect all pages</li>
+                                <li>Click on reverse icon to reverse the order of pages</li>
+                                <li>File entry and it's pages are colored the same</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5 page-list-column">
+                    <div id="page-list-column-title">Choose the required pages in desired order</div>
+                    <app-page-selector-list #pageList (onPageClick)="displayPage($event)"></app-page-selector-list>
                 </div>
             </div>
         </div>
-        <div class="col-3 middle-column">
-            <h6>Select & Reorder the required pages</h6>
-            <app-page-selector-list #pageList (onPageClick)="displayPage($event)"></app-page-selector-list>
-        </div>
-        <div class="col-6 right-column">
+        <div class="col-5 right-column">
+            <div id="pdf-viewer-title">
+                <span [ngStyle]="{'color':currentInputFile?.color}">{{showPDFName}} - Page {{showPage}}</span>
+            </div>
             @if (showPDF && showPage) {
-            <pdf-viewer [src]="showPDF" [render-text]="true" [original-size]="false" [show-all]="true" [page]="showPage"
+            <pdf-viewer [src]="showPDF" [render-text]="true" [original-size]="false" [autoresize]="true" [show-all]="true" [(page)]="showPage" (page-rendered)="onPageRendered($event)"
                 style="width: 100%; height: 100%;"></pdf-viewer>
             }
         </div>
@@ -61,8 +76,6 @@
     <ng-container [ngTemplateOutlet]="noFileSelected"></ng-container>
     }
 </div>
-<!-- TODO: release notes ela maintain cheyyali -->
-<!-- TODO: tests implement cheyali -->
 <ng-template #noFileSelected>
     <div class="home">
         <h1>PDFUSION</h1>
@@ -79,6 +92,14 @@
             <div>
                 <md-filled-button (click)="fileInput.click()">Choose Files</md-filled-button>
                 <input type="file" hidden #fileInput (change)="onFileSelected($event)" multiple>
+                @if (invalidFileNames.length > 0) {
+                    <div style="margin-top: 10px; color: red;">
+                        Error while loading the file{{invalidFileNames.length == 1 ? '' : 's'}}:
+                            @for (item of invalidFileNames; track $index) {
+                                <span> {{item}}{{ $index < invalidFileNames.length - 1 ? ',' : '.' }}</span>
+                            }
+                    </div>
+                }
             </div>
         </div>
         <div class="footer">

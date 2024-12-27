@@ -69,3 +69,8 @@
     font-style: normal;
     src: url("../public/static/SUSE-Regular.ttf") format("truetype");
   }
+
+body {
+  height: 100vh;
+  display: block;
+}

@@ -6,3 +6,7 @@ icon SVG are fetched from the repo
  https://github.com/google/material-design-icons/blob/master/symbols/web/swap_vert/materialsymbolsoutlined/swap_vert_24px.svg?short_path=12e0174
  https://github.com/google/material-design-icons/blob/master/symbols/web/close/materialsymbolsrounded/close_24px.svg?short_path=3956434
  node version 20.14.0
+TODO: SPLINE to create animations
+Framer for scroll trigger
+<!-- TODO: release notes ela maintain cheyyali -->
+<!-- TODO: tests implement cheyali -->

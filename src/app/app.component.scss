@@ -55,6 +55,7 @@
   .left-body {
     height: calc(100vh - 250px);
     overflow-y: auto;
+    padding-right: 10px;
 
     &::-webkit-scrollbar {
       width: 4px;
@@ -71,21 +72,25 @@
   }
 }
 
-.middle-column {
-  background-color: #4E1E44;
-  padding: 40px 0px;
-  height: 100vh;
+.page-list-column {
+  text-align: center;
 
-  h6 {
-    color: white;
-    margin-left: 40px;
-    font-weight: 500;
+  #page-list-column-title {
+    color: #FFD7F0;
+    font-size: medium;
+    margin-bottom: 10px;
   }
 }
 
 .right-column {
   height: 100vh;
   overflow: hidden;
+  background-color: #4E1E44;
+  border-radius: 15px;
+  #pdf-viewer-title {
+    padding: 10px 0px;
+    text-align: center;
+  }
 }
 
 // ///////////////////////////////////////////////
