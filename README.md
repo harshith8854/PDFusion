@@ -1,12 +1,21 @@
 # PDFusion
-Web app to trim and merge PDF
-DB Options:
-https://gist.github.com/bmaupin/0ce79806467804fdbbf8761970511b8c
-icon SVG are fetched from the repo
- https://github.com/google/material-design-icons/blob/master/symbols/web/swap_vert/materialsymbolsoutlined/swap_vert_24px.svg?short_path=12e0174
- https://github.com/google/material-design-icons/blob/master/symbols/web/close/materialsymbolsrounded/close_24px.svg?short_path=3956434
- node version 20.14.0
-TODO: SPLINE to create animations
-Framer for scroll trigger
+This project is a browser-based web application designed for efficient PDF manipulation. It offers utilities to rearrange, merge and manage pages from one or multiple PDF files seamlessly. Users can perform operations such as reordering, merging specific pages all within the browser. With no reliance on backend servers, the application ensures privacy and speed, as all the processing is handled locally on the client side.
+
+## Getting started
+This application is built using
+ ![Node.js Version](https://img.shields.io/badge/node-v20.14.0-orange?logo=nodedotjs)
+ ![Angular Version](https://img.shields.io/badge/angular-v18.1.3-white?logo=angular)
+ ![NPM](https://img.shields.io/badge/npm-v10.7.0-darkgreen?logo=npm)
+ 
+ ```bash
+ npm run start
+ ```
+ 
+
+<!-- TODO: SPLINE to create animations -->
+<!-- Framer for scroll trigger -->
 <!-- TODO: release notes ela maintain cheyyali -->
 <!-- TODO: tests implement cheyali -->
+<!-- TODO: to introduce new way to merge pdfs by reading number inputs , handle mobile view -->
+<!-- TODO: to improve branding -->
+<!-- TODO: to improve styling web design and better css handling -->
