@@ -8,6 +8,7 @@ This application is built using
  ![NPM](https://img.shields.io/badge/npm-v10.7.0-darkgreen?logo=npm)
  
  ```bash
+ npm install
  npm run start
  ```
  
