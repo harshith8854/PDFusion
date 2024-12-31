@@ -1,8 +1,11 @@
-import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, ViewChild } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, input, ViewChild } from '@angular/core';
 import { PageSelectorListComponent } from "./page-selector-list/page-selector-list.component";
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { PDFDocument } from 'pdf-lib';
 import '@material/web/button/filled-button.js';
+import '@material/web/tabs/tabs.js';
+import '@material/web/tabs/primary-tab.js';
+import { MdTabs } from '@material/web/tabs/tabs.js';
 import { CommonModule } from '@angular/common';
 import { PDFDetails, PDFFile } from './models/pdf-file';
 import { Page } from './models/page';
@@ -32,6 +35,10 @@ export class AppComponent {
   @ViewChild(PageSelectorListComponent)
   pageSelectorListComponent!: PageSelectorListComponent;
   invalidFileNames: string[] = [];
+  inputPageList: Page[] = [];
+  activeTab: number = 0;
+  invalidTextInput: boolean = false;
+  errorText: string = "Invalid Input";
 
   constructor(public colorService: ColorService) {
   }
@@ -109,6 +116,8 @@ export class AppComponent {
       this.showPDF = this.inputFiles[0].data;
       this.showPDFName = this.inputFiles[0].name;
       this.showPage = 1;
+      this.currentInputFile = this.inputFiles[0];
+      this.currentPage = 1;
     }
   }
 
@@ -139,8 +148,13 @@ export class AppComponent {
   }
 
   async generateOutput(pageList: PageSelectorListComponent) {
-    const pages: Page[] = [];
-    pageList.pages.filter(p => p.isSelected).map(p => pages.push(p));
+    let pages: Page[] = [];
+    if(this.activeTab == 0){
+      pageList.pages.filter(p => p.isSelected).forEach(p => pages.push(p));
+    } else {
+      pages = this.inputPageList;
+    }
+
     const newPDF = await PDFDocument.create();
     for (const page of pages) {
       const fileIndex = this.inputFiles.findIndex(file => file.name === page.fileName);
@@ -182,6 +196,50 @@ export class AppComponent {
     this.outputFileName = (event.target.value ? event.target.value : 'output') + ".pdf";
   }
 
+  setOutputFilePages(event: any) {
+    let pageList: Page[] = [];
+    const inputRegex = new RegExp('^[0-9]+:[0-9]+-{0,1}[0-9]*(,[0-9]+:[0-9]+-{0,1}[0-9]*)*$');
+    if (event.target.value != '' && inputRegex.test(event.target.value)) {
+        this.invalidTextInput = false; 
+        event.target.value.split(',').forEach((input: string) => {
+        const file = parseInt(input.split(':')[0])-1;
+        if(file >= this.inputFiles.length){
+          this.invalidTextInput = true;
+          this.errorText = "Invalid File Number "+(file+1)+" in the input!!";
+          return;
+        }
+        let start,end;
+        if(input.split(':')[1].indexOf('-')!=-1){
+          const pages = input.split(':')[1].split('-');
+          start = parseInt(pages[0]);
+          end = this.pdfDocs[file].getPageCount();
+          if(pages[1]){
+            end = parseInt(pages[1]);
+          }
+        } else {
+          start = parseInt(input.split(':')[1]);
+          end = start;
+        } 
+        if(start > end || start < 1 || end > this.pdfDocs[file].getPageCount()){
+          this.invalidTextInput = true;
+          this.errorText = "Invalid Page Range in the input!!";
+          return;
+        }
+        for (let i = start; i <= end; i++) {
+          pageList.push(new Page(i, true, this.inputFiles[file].name, this.inputFiles[file].color, this.inputFiles[file].id));
+        }
+      });
+      this.inputPageList = pageList;
+    } else {
+      this.invalidTextInput = true;
+      const input = event.target.value;
+      if(input.charAt(input.length - 1) == ','){
+        this.errorText = "Extra comma present in the input!!, please remove it"
+      } else {
+        this.errorText = "Invalid Input";
+      }
+    }
+  }
   /**
    * Event handler for when a page is rendered.
    * 
@@ -211,4 +269,8 @@ export class AppComponent {
     this.currentInputFile = undefined;
     this.applicationContext.inputFileDetails.next([]);
   }
+
+  switchTab(event: any) {
+    this.activeTab = event.target.activeTabIndex;
+  }  
 }

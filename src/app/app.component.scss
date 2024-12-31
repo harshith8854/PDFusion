@@ -53,6 +53,13 @@
     font-size: small;
   }
 
+  .input-example {
+    padding: 0px 15px 15px 15px;
+    color: #E9A6D3;
+    font-size: small;
+    overflow-y: auto;
+  }
+
   .left-body {
     height: calc(100vh - 250px);
     overflow-y: auto;
@@ -75,11 +82,15 @@
 
 .page-list-column {
   text-align: center;
+  #text-input {
+    padding-top: 10px;
+    text-align: left;
+  }
 
   #page-list-column-title {
     color: #FFD7F0;
     font-size: medium;
-    margin-bottom: 10px;
+    margin: 10px 0px;
   }
 }
 

@@ -17,6 +17,5 @@ This application is built using
 <!-- Framer for scroll trigger -->
 <!-- TODO: release notes ela maintain cheyyali -->
 <!-- TODO: tests implement cheyali -->
-<!-- TODO: to introduce new way to merge pdfs by reading number inputs , handle mobile view -->
 <!-- TODO: to improve branding -->
 <!-- TODO: to improve styling web design and better css handling -->
