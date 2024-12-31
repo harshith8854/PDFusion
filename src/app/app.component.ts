@@ -125,6 +125,19 @@ export class AppComponent {
     console.log(`displaying page ${page.pageNumber} from file: ${page.fileName}`);
   }
 
+  displayFile(index: number){
+    if(this.showPDFName != this.inputFiles[index].name){
+      this.showPage = undefined;
+      this.showPDF = undefined;
+      this.showPDFName = this.inputFiles[index].name;
+      this.showPDF = this.inputFiles[index].data;
+    }
+    this.showPage = 1;
+    this.currentPage = 1;
+    this.currentInputFile = this.inputFiles[index];
+    console.log(`displaying file: ${this.inputFiles[index].name}`);
+  }
+
   async generateOutput(pageList: PageSelectorListComponent) {
     const pages: Page[] = [];
     pageList.pages.filter(p => p.isSelected).map(p => pages.push(p));

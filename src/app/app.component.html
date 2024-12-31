@@ -18,7 +18,7 @@
                     }
                     <div class="left-body">
                         @for (file of inputFiles; track $index) {
-                        <p>File {{ $index + 1 }}: <span class="highlight" [ngStyle]="{'color':file.color}">{{file.name}}</span>&nbsp;<sub>{{file.pageCount}}
+                        <p>File {{ $index + 1 }}: <span class="highlight" [ngStyle]="{'color':file.color}" (click)="displayFile($index)">{{file.name}}</span>&nbsp;<sub>{{file.pageCount}}
                                 @if (file.pageCount>1) {
                                     pages
                                 } @else {
@@ -45,6 +45,7 @@
                         <div>
                             Guidelines:
                             <ul>
+                                <li>Click on file name to view the file</li>
                                 <li>Use arrows / Drag placeholder to reorder pages</li>
                                 <li>Click on page number to view the page</li>
                                 <li>Click on checkbox to select/deselect a page</li>
