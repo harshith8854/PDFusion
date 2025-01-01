@@ -1,8 +1,6 @@
 #root {
   font-family: "SUSE", sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  // background-color: #3A0032;
+  min-height: 100vh;
   background-color: var(--md-sys-color-surface);
   &::-webkit-scrollbar {
     width: 7px;
@@ -22,7 +20,7 @@
   padding: 40px 10px 40px 40px;
   color: #C73BAF;
   text-align: left;
-  overflow: hidden;
+  overflow-y: hidden;
   height: 100vh;
 
   .highlight {
@@ -109,9 +107,9 @@
 
 .home {
   padding: 40px;
-  height: 100%;
-  position: relative;
+  min-height: 100vh;
   color: #C73BAF;
+  position: relative;
 
   .highlight,
   b {
@@ -123,12 +121,15 @@
     color: #FF7AE2;
   }
 
-  .description {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  #body {
+    display: flex;
+    justify-content: center;
+    #description {
+      width: 50%;
+      margin: 10vh 0px;
+    }
   }
+
 
   .footer {
     position: absolute;
@@ -136,21 +137,27 @@
     left: 0;
     width: 100%;
     padding: 20px;
-    // background-color: #4E1E44;
     color: white;
-
-    span {
-      a {
-        text-decoration: none;
-        margin: 0px 5px;
-        // color: #C73BAF;
-      }
-    }
+    text-align: right;
 
     #git-ref {
       text-decoration: none;
-      position: absolute;
-      right: 20px;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    font-size: smaller;
+
+    #body{
+      #description {
+        width: 100%;
+        margin: 5vh 0px;
+      }
+    }
+  }
+  .left-column {
+    height: auto;
   }
 }

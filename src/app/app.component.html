@@ -121,41 +121,35 @@
 </div>
 <ng-template #noFileSelected>
     <div class="home">
-        <h1>PDFUSION</h1>
-        <p><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</p>
-        <div class="description">
-            <p>Easily organize your PDF documents with our intuitive online tool, where <b>everything happens right in
-                    your browser!</b></p>
-            <ul>
-                <li>Choose and rearrange the required pages with simple drag-and-drop functionality. </li>
-                <li>No need to worry about privacy – your files are never uploaded to any server; all processing is done
-                    locally on your device, ensuring complete security and confidentiality.</li>
-            </ul>
-            <p>Enjoy a seamless, private, and reliable experience.</p>
-            <div>
-                <md-filled-button (click)="fileInput.click()">Choose Files</md-filled-button>
-                <input type="file" hidden #fileInput (change)="onFileSelected($event)" multiple>
-                @if (invalidFileNames.length > 0) {
-                    <div style="margin-top: 10px; color: red;">
-                        Error while loading the file{{invalidFileNames.length == 1 ? '' : 's'}}:
-                            @for (item of invalidFileNames; track $index) {
-                                <span> {{item}}{{ $index < invalidFileNames.length - 1 ? ',' : '.' }}</span>
-                            }
-                    </div>
-                }
+        <div id="title">
+            <h1>PDFUSION</h1>
+            <p><span class="highlight">Rearrange PDF Pages Online</span> - Fast, Secure & 100% Private</p>
+        </div>
+        <div id="body">
+            <div id="description">
+                <p>Easily organize your PDF documents with our intuitive online tool, where <b>everything happens right in
+                        your browser!</b></p>
+                <ul>
+                    <li>Choose and rearrange the required pages with simple drag-and-drop functionality. </li>
+                    <li>No need to worry about privacy – your files are never uploaded to any server; all processing is done
+                        locally on your device, ensuring complete security and confidentiality.</li>
+                </ul>
+                <p>Enjoy a seamless, private, and reliable experience.</p>
+                <div>
+                    <md-filled-button (click)="fileInput.click()">Choose Files</md-filled-button>
+                    <input type="file" hidden #fileInput (change)="onFileSelected($event)" multiple>
+                    @if (invalidFileNames.length > 0) {
+                        <div style="margin-top: 10px; color: red;">
+                            Error while loading the file{{invalidFileNames.length == 1 ? '' : 's'}}:
+                                @for (item of invalidFileNames; track $index) {
+                                    <span> {{item}}{{ $index < invalidFileNames.length - 1 ? ',' : '.' }}</span>
+                                }
+                        </div>
+                    }
+                </div>
             </div>
         </div>
         <div class="footer">
-            <span>
-                Built using
-                <a href="https://angular.dev/" target="_blank"><img src="../angular_gradient.png" height="24" width="24"
-                        alt="angular"></a>
-                <a href="https://getbootstrap.com/" target="_blank"><img src="../bootstrap.png" height="24" width="24"
-                        alt="angular"></a>
-                <a href="https://material-web.dev/" target="_blank">material-web</a>
-                <a href="https://www.npmjs.com/package/pdf-lib/" target="_blank">pdf-lib</a>
-                <a href="https://www.npmjs.com/package/ng2-pdf-viewer" target="_blank">ng2-pdf-viewer</a>
-            </span>
             <a id="git-ref" href="https://github.com/harshith8854/PDFusion/issues" target="_blank">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-github"
                     viewBox="0 0 16 16">

@@ -6,6 +6,9 @@ This application is built using
  ![Node.js Version](https://img.shields.io/badge/node-v20.14.0-orange?logo=nodedotjs)
  ![Angular Version](https://img.shields.io/badge/angular-v18.1.3-white?logo=angular)
  ![NPM](https://img.shields.io/badge/npm-v10.7.0-darkgreen?logo=npm)
+ ![material-web](https://img.shields.io/badge/@material/web-v2.1.0-E9A6D3)
+ ![pdf-lib](https://img.shields.io/badge/pdflib-v1.17.1-4E1E44)
+ ![ng2-pdf-viewer](https://img.shields.io/badge/ng2pdfviewer-v10.2.2-C73BAF)
  
  ```bash
  npm install
@@ -18,4 +21,4 @@ This application is built using
 <!-- TODO: release notes ela maintain cheyyali -->
 <!-- TODO: tests implement cheyali -->
 <!-- TODO: to improve branding -->
-<!-- TODO: to improve styling web design and better css handling -->
+<!-- TODO: better css handling -->
