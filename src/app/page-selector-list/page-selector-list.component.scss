@@ -52,3 +52,11 @@ svg, md-checkbox {
 .page-number{
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px) {
+    .list-holder {
+        .page-list {
+            height: auto;
+        }
+    }
+}
