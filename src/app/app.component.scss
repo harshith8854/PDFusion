@@ -18,7 +18,7 @@
 
 .left-column {
   padding: 40px 10px 40px 40px;
-  color: #C73BAF;
+  color: var(--md-sys-color-on-surface);
   text-align: left;
   overflow-y: hidden;
   height: 100vh;
@@ -53,7 +53,7 @@
 
   .input-example {
     padding: 0px 15px 15px 15px;
-    color: #E9A6D3;
+    // color: #E9A6D3;
     font-size: small;
     overflow-y: auto;
   }
@@ -76,26 +76,25 @@
       border-radius: 5px;
     }
   }
-}
-
-.page-list-column {
-  text-align: center;
-  #text-input {
-    padding-top: 10px;
-    text-align: left;
-  }
-
-  #page-list-column-title {
-    color: #FFD7F0;
-    font-size: medium;
-    margin: 10px 0px;
+  
+  .page-list-column {
+    text-align: center;
+    #text-input {
+      padding-top: 10px;
+      text-align: left;
+    }
+  
+    #page-list-column-title {
+      font-size: medium;
+      margin: 10px 0px;
+    }
   }
 }
 
 .right-column {
   height: 100vh;
   overflow: hidden;
-  background-color: #4E1E44;
+  background-color: var(--md-sys-color-primary-container);
   border-radius: 15px;
   #pdf-viewer-title {
     padding: 10px 0px;
